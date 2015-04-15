@@ -35,7 +35,7 @@ var Workspace = Backbone.Router.extend({
 });
 
 $(function(){
-    router = new Workspace();
+    var router = new Workspace();
     Backbone.history.start();
 
 
@@ -86,6 +86,10 @@ $(function(){
         return false;
     });
 
+
+    $body.on('click', '.close-modal', function(){
+        $('#modal').modal('hide');
+    });
 
 });
 
