@@ -2,7 +2,6 @@
 
 
 
-
 var User = Backbone.Model.extend({});
 var templates = {}
 var userTypes = {
@@ -22,7 +21,6 @@ $(function(){
     templates.modal_2_string = templates.modal_2_template({step: 2});
     templates.modal_3_string = templates.modal_3_template({step: 3});
 });
-
 
 
 var Workspace = Backbone.Router.extend({
@@ -53,9 +51,10 @@ $(function(){
 
 
 $(function(){
-    var u = new User();
+    window.u = new User();
     var $modal = $('#modal');
     var $modal_content = $modal.find('.modal-content');
+    var $body = $('body');
 
     $('#openModal').on('click', function(){
 
@@ -65,36 +64,34 @@ $(function(){
 
 
 
-
-
-    $('body').on('click', '[data-user-type]', function(){
-        u.set('type', $(this).data('userType'));
+    $body.on('submit', '.form-1', function(e){
+        var formData = $(this).serializeArray();
+        var data = {};
+        $.each(formData, function(){
+            data[this.name] = this.value
+        });
+        u.set(data);
         $modal_content.html(templates.modal_2_template({
             step: 2,
             type: userTypes[u.get('type')]
         }));
+        return false;
+
     });
 
-
-    $('body').on('submit', 'form', function(){
-        console.log('form is submitted');
+    $body.on('submit', '#form-2', function(){
+        var formData = $(this).serializeArray();
+        var data = {};
+        $.each(formData, function(){
+            data[this.name] = this.value
+        });
+        u.set(data);
+        $modal_content.html(templates.modal_3_template({
+            step: 3
+        }));
         return false;
     });
 
-    //$('#register').on('click', function(){
-    //    u.set({
-    //        name: $('#nameInput').val(),
-    //        email: $('#emailInput').val(),
-    //        phone: $('#phoneInput').val()
-    //    });
-    //    console.log(u.attributes);
-    //    $('.modal').modal('hide');
-    //    $('.modal-3').modal('show');
-    //    return false;
-    //});
 
 });
-
-
-// start new single_modal branch
 

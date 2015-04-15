@@ -37,8 +37,14 @@
     </div>
     <div class="modal-body">
         <p>Кто вы?</p>
-        <button type="button" data-user-type="customer" class="btn btn-default">Покупатель</button>
-        <button type="button" data-user-type="seller" class="btn btn-default">Продавец</button>
+        <form class="form-1" action="/">
+            <input type="hidden" name="type" value="customer" />
+            <button type="submit" class="btn btn-default">Покупатель</button>
+        </form>
+        <form class="form-1" action="/">
+            <input type="hidden" name="type" value="seller" />
+            <button type="submit" class="btn btn-default">Продавец</button>
+        </form>
     </div>
 </script>
 
@@ -52,7 +58,7 @@
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
             Вы регистрируетесь как {{type}}
         </p>
-        <form action="/">
+        <form id="form-2" action="/">
             <div class="form-group">
                 <label for="nameInput">Представьтесь:</label>
                 <div class="input-group">
@@ -83,7 +89,7 @@
             <div class="row">
                 <div class="col-md-12">
                     ←
-                    <a href="#">Назад</a>
+                    <a href="#modal-1">Назад</a>
                     <button class="btn btn-default">Зарегистрироваться</button>
                 </div>
             </div>
