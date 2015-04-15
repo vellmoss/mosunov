@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Главная страница</h1>
+
+<!-- Small modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-1">Войти</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-2">Войти</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal-3">Войти</button>
+
+
+
+<div class="modal fade modal-1" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" id="myModalLabel">Регистрация - шаг 1 из 3</h4>
+            </div>
+            <div class="modal-body">
+                <p>Кто вы?</p>
+                <button type="button" data-user-type="customer" class="btn btn-default">Покупатель</button>
+                <button type="button" data-user-type="seller" class="btn btn-default">Продавец</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade modal-2" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Регистрация - шаг 2 из 3</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    Вы регистрируетесь как
+                    <span class="user-type"></span>
+                </p>
+                <form action="/">
+                    <div class="form-group">
+                        <label for="nameInput">Представьтесь:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            </span>
+                            <input type="text" class="form-control" id="nameInput" name="name" placeholder="Введите ФИО">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nameInput">Электронная почта:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                            </span>
+                            <input type="email" class="form-control" id="emailInput" name="email" placeholder="Введите ваш e-mail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nameInput">Телефон:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                            </span>
+                            <input type="text" class="form-control" id="phoneInput" name="phone" placeholder="Например, +79161234567">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            ←
+                            <a href="#">Назад</a>
+                            <button class="btn btn-default" id="register">Зарегистрироваться</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade modal-3" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Регистрация - шаг 3 из 3</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    Регистрация завершена. Спасибо!
+                </p>
+                <p><a href="#">Личный кабинет</a></p>
+                <p><a href="#">Перейти в каталог</a> →</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script id="popup-template" type="text/x-handlebars-template">
+    <div class="modal fade {{id}}" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Регистрация - шаг {{step}} из {{stepcount}}</h4>
+                </div>
+                <div class="modal-body">
+                    {{content}}
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/handlebars.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/backbone-min.js"></script>
+<script src="js/application.js"></script>
+</body>
+</html>
