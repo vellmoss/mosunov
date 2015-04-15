@@ -4,11 +4,24 @@
 
 
 var User = Backbone.Model.extend({});
-
+var templates = {}
 var userTypes = {
     customer: 'Покупатель',
     seller: 'Продавец'
 };
+
+
+$(function(){
+    templates.modal_1   = $("#modal-1-template").html();
+    templates.modal_2   = $("#modal-2-template").html();
+    templates.modal_3   = $("#modal-3-template").html();
+    templates.modal_1_template = Handlebars.compile(templates.modal_1);
+    templates.modal_2_template = Handlebars.compile(templates.modal_2);
+    templates.modal_3_template = Handlebars.compile(templates.modal_3);
+    templates.modal_1_string = templates.modal_1_template({step: 1});
+    templates.modal_2_string = templates.modal_2_template({step: 2});
+    templates.modal_3_string = templates.modal_3_template({step: 3});
+});
 
 
 
@@ -32,30 +45,53 @@ var Workspace = Backbone.Router.extend({
 $(function(){
     router = new Workspace();
     Backbone.history.start();
+
+
+
+
 });
 
 
 $(function(){
     var u = new User();
-    $('[data-user-type]').on('click', function(){
-        u.set('type', $(this).data('userType'));
-        $('.modal').modal('hide');
-        $('.modal-2 .user-type').html(userTypes[u.get('type')]);
-        $('.modal-2').modal('show');
-        console.log(u.attributes);
+    var $modal = $('#modal');
+    var $modal_content = $modal.find('.modal-content');
+
+    $('#openModal').on('click', function(){
+
+        $modal_content.html(templates.modal_1_template({step: 1}));
+        $modal.modal('show');
     });
 
-    $('#register').on('click', function(){
-        u.set({
-            name: $('#nameInput').val(),
-            email: $('#emailInput').val(),
-            phone: $('#phoneInput').val()
-        });
-        console.log(u.attributes);
-        $('.modal').modal('hide');
-        $('.modal-3').modal('show');
+
+
+
+
+    $('body').on('click', '[data-user-type]', function(){
+        u.set('type', $(this).data('userType'));
+        $modal_content.html(templates.modal_2_template({
+            step: 2,
+            type: userTypes[u.get('type')]
+        }));
+    });
+
+
+    $('body').on('submit', 'form', function(){
+        console.log('form is submitted');
         return false;
     });
+
+    //$('#register').on('click', function(){
+    //    u.set({
+    //        name: $('#nameInput').val(),
+    //        email: $('#emailInput').val(),
+    //        phone: $('#phoneInput').val()
+    //    });
+    //    console.log(u.attributes);
+    //    $('.modal').modal('hide');
+    //    $('.modal-3').modal('show');
+    //    return false;
+    //});
 
 });
 
