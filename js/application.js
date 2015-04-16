@@ -73,10 +73,21 @@ $(function(){
     $body.on('submit', '#form-2', function(){                           // собираю данные из 2-го активированного
         var formData = $(this).serializeArray();                        // мод. окна
         var data = {};
+        var noerr = true;                                                 // флаг валидности поля(-ей)
         $.each(formData, function(){
             data[this.name] = this.value
+            if(data[this.name]=='name'){                                 // проверка фио на соответствие шаблону
+                this.value.replace(/.*(?=#[^\s]*$)/, '');
+                if(this.value.length == 0) noerr = false;
+            }
+            if(data[this.name]=='email'){                               // проверка email на заполненность: val().length !=0
+                if(length(this.value) == 0) noerr = false;
+            }
+            if(data[this.name]=='phone'){                               // проверка телефона на соответствие шаблону
+                if(length(this.value) == 0) noerr = false;
+            }
         });
-        u.set(data);                                                    // помещаю их в экз. модели данных
+        if(noerr) u.set(data);                                            // помещаю их в экз. модели данных
         $modal_content.html(templates.modal_3({                         // активизирую 3-е мод. окно на основе
             step: 3                                                     // контента 3-го шаблона и парам-а step
         }));
