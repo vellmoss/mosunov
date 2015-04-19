@@ -1,6 +1,6 @@
 
 
-
+// что-то типа доморощенного "Model" и глобальных переменных ---------------------------------------------
 
 var User = Backbone.Model.extend({});                                   // создаю класс модели
 var templates = {};                                                     // шаблоны сохранять там буду
@@ -9,37 +9,14 @@ var userTypes = {                                                       // хэ�
     seller: 'Продавец'
 };
 
-
+// что-то типа доморощенного "View" ----------------------------------------------------------------------
 $(function(){
     templates.modal_1 = Handlebars.compile($("#modal-1-template").html());      // шаблон 1-й мод. формы
     templates.modal_2 = Handlebars.compile($("#modal-2-template").html());      // -- 2 --
     templates.modal_3 = Handlebars.compile($("#modal-3-template").html());      // -- 3 --
 });
 
-
-var Workspace = Backbone.Router.extend({                                // проба роутов приложения
-
-    routes: {
-        "help": "help",
-        "search/:a/:b": "search"
-    },
-
-    help: function() {
-        console.log('Вызвана функция help');
-    },
-
-    search: function(a, b) {
-        console.log('Вызвана функция с аргументами '+a+' '+b);
-    }
-
-});
-
-$(function(){                                                           // экз. роута на всякий случай
-    var router = new Workspace();
-    Backbone.history.start();                                           // старт прослушки событий и управления переходами
-
-});
-
+// что-то типа доморощенного "Controller" ----------------------------------------------------------------
 
 $(function(){
     window.u = new User();                                              // создаю экз. модели
@@ -55,11 +32,11 @@ $(function(){
 
 
 
-    $body.on('submit', '.form-1', function(e){                          // определяю тип юзера
+    $body.on('submit', '.form-1', function(){                           // определяю тип юзера
         var formData = $(this).serializeArray();                        // одной из 2-х форм из 1-го модального окна
         var data = {};
         $.each(formData, function(){
-            data[this.name] = this.value
+            data[this.name] = this.value;
         });
         u.set(data);                                                    // сохраняю тип юзера в экз. модели данных
         $modal_content.html(templates.modal_2({                         // активизирую 2-е мод. окно на основе
@@ -73,29 +50,38 @@ $(function(){
     $body.on('submit', '#form-2', function(){                           // собираю данные из 2-го активированного
         var formData = $(this).serializeArray();                        // мод. окна
         var data = {};
-        var noerr = true;                                                 // флаг валидности поля(-ей)
+        var noerr = true;                                               // флаг валидности поля(-ей)
         $.each(formData, function(){
-            data[this.name] = this.value
-            if(data[this.name]=='name'){                                 // проверка фио на соответствие шаблону
-                this.value.replace(/.*(?=#[^\s]*$)/, '');
+            data[this.name] = this.value;
+            if(data[this.name]=='name'){                                // проверка фио на соответствие шаблону
+                this.value.replace(/.*(?=#[^\s]*$)/, '');               // /^[a-zA-Z0-9а-яА-Я]/
                 if(this.value.length == 0) noerr = false;
+//                console.log('имени: '+this.name+'   '+this.value);
             }
             if(data[this.name]=='email'){                               // проверка email на заполненность: val().length !=0
                 if(length(this.value) == 0) noerr = false;
+                console.log('для email: '+this.name+'   '+this.value);
             }
             if(data[this.name]=='phone'){                               // проверка телефона на соответствие шаблону
                 if(length(this.value) == 0) noerr = false;
+//                console.log('для тел.: '+this.name+'   '+this.value);
             }
         });
-        if(noerr) u.set(data);                                            // помещаю их в экз. модели данных
+        if(noerr) u.set(data);                                          // помещаю их в экз. модели данных
         $modal_content.html(templates.modal_3({                         // активизирую 3-е мод. окно на основе
             step: 3                                                     // контента 3-го шаблона и парам-а step
         }));
         return false;                                                   // чтобы по submit не улетала на 404
     });
 
+    $body.on('click', '#form-2-a', function(){                          // возврат по ссылке на 1-й шаг         $('#modal').modal('hide');
+        var $m = $('#modal');
+            $modal_content = $m.find('.modal-content');                 // дива контента шаблона там будет
+            $modal_content.html(templates.modal_1({step: 1}));              // вызов 1-го мод. элем. без всякого роута 1-й шаб.
+            $m.modal('show');
+    });
 
-    $body.on('click', '.close-modal', function(){                       // по любой из ссылок 3-го мод. окна
+        $body.on('click', '.close-modal', function(){                   // по любой из ссылок 3-го мод. окна
         $('#modal').modal('hide');                                      // гашу его
     });
 

@@ -86,9 +86,7 @@ if (typeof jQuery === 'undefined') {
 
 
 +function ($) {
-  'use strict';
-
-  // ALERT CLASS DEFINITION
+  'use strict';// ALERT CLASS DEFINITION
   // ======================
 
   var dismiss = '[data-dismiss="alert"]'

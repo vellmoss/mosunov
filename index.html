@@ -20,6 +20,7 @@
 
 <div class="modal fade" id="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
+        <a name="modal_"></a>
         <div class="modal-content"></div>
     </div>
 </div>
@@ -61,7 +62,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             </span>
-                    <input type="text" class="form-control" id="nameInput" name="name" placeholder="Введите ФИО">
+                    <input type="text" class="form-control" id="nameInput" name="name" placeholder="Введите ФИО" pattern="^[A-Za-zА-Яа-яЁё\s]+$">    <!--[a-zA-Z0-9а-яёА-ЯЁ] -->
                 </div>
             </div>
             <div class="form-group">
@@ -79,13 +80,13 @@
                             <span class="input-group-addon" id="basic-addon1">
                                 <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
                             </span>
-                    <input type="text" class="form-control" id="phoneInput" name="phone" placeholder="Например, +79161234567">
+                    <input type="text" class="form-control" id="phoneInput" name="phone" placeholder="Например, +79161234567" pattern="((8|\+7)[0-9]{10}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     ←
-                    <a href="#modal-1">Назад</a>
+                    <a href="#modal_" id="#form2-a">Назад</a>
                     <button class="btn btn-default">Зарегистрироваться</button>
                 </div>
             </div>
