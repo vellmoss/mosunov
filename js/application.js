@@ -24,8 +24,7 @@ $(function(){
     var $modal_content = $modal.find('.modal-content');                 // дива контента шаблона там будет
     var $body = $('body');                                              // сохр. селектор body-tag
 
-    $('body').on('click', '#openFirstModal, #form2-a', function(){
-
+    $body.on('click', '#openFirstModal, #form2-a', function(){
         $modal_content.html(templates.modal_1({step: 1}));              // вызов 1-го мод. элем. без всякого роута 1-й шаб.
         $modal.modal('show');
     });
