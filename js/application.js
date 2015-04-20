@@ -71,16 +71,7 @@ $(function(){
         }));
         return false;                                                   // чтобы по submit не улетала на 404
     });
-/*          --------- попытка отработать стрелочку "назад <--" во второй модальной форме
-    $body.on('click', '#form-2-a', function(){                          // возврат по ссылке на 1-й шаг         $('#modal').modal('hide');
-        var $m = $('#modal');
-        var $t = {};
-        var $modal_content = $m.find('.modal-content');                 // дива контента шаблона там будет
-            $t.modal_1 = Handlebars.compile($("#modal-1-template").html());
-            $modal_content.html(templates.modal_1({step: 1}));          // вызов 1-го мод. элем. без всякого роута 1-й шаб.
-            $m.modal('show');
-    });
-*/
+
         $body.on('click', '.close-modal', function(){                   // по любой из ссылок 3-го мод. окна
         $('#modal').modal('hide');                                      // гашу его
     });
